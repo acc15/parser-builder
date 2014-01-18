@@ -61,16 +61,11 @@ public class CalculatorParserTest {
 
         public double execute(double a, double b) {
             switch (this) {
-            case ADD:
-                return a + b;
-            case SUB:
-                return a - b;
-            case MUL:
-                return a * b;
-            case DIV:
-                return a / b;
-            case POW:
-                return Math.pow(a, b);
+            case ADD: return a + b;
+            case SUB: return a - b;
+            case MUL: return a * b;
+            case DIV: return a / b;
+            case POW: return Math.pow(a, b);
             }
             throw new UnsupportedOperationException("Unknown operation: " + this);
         }
@@ -82,8 +77,7 @@ public class CalculatorParserTest {
 
         public double execute(double a) {
             switch (this) {
-            case NEGATE:
-                return -a;
+            case NEGATE: return -a;
             }
             throw new UnsupportedOperationException("Unknown unary operation: " + this);
         }
