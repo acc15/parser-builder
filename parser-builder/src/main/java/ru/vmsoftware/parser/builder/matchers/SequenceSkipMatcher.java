@@ -7,21 +7,30 @@ import ru.vmsoftware.parser.builder.iterators.CharIterator;
  * @author Vyacheslav Mayorov
  * @since 2014-18-01
  */
-class SequenceMatcher implements TokenMatcher {
+class SequenceSkipMatcher implements TokenMatcher {
 
     private TokenMatcher[] matchers;
 
-    public SequenceMatcher(TokenMatcher[] matchers) {
+    public SequenceSkipMatcher(TokenMatcher[] matchers) {
         this.matchers = matchers;
     }
 
     @Override
     public boolean match(CharIterator iter, ParserConfig config) {
         for (TokenMatcher matcher: matchers) {
+            final int startPos = iter.position();
+            if (matcher.match(iter, config)) {
+                continue;
+            }
+            iter.moveTo(startPos);
+            if (!config.getSkip().match(iter, config)) {
+                return false;
+            }
             if (!matcher.match(iter, config)) {
                 return false;
             }
         }
+        config.getSkip().match(iter, config);
         return true;
     }
 

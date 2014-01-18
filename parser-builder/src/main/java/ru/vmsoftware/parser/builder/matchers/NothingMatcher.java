@@ -1,5 +1,6 @@
 package ru.vmsoftware.parser.builder.matchers;
 
+import ru.vmsoftware.parser.builder.ParserConfig;
 import ru.vmsoftware.parser.builder.iterators.CharIterator;
 
 /**
@@ -19,7 +20,7 @@ class NothingMatcher implements TokenMatcher {
 
     private static final NothingMatcher instance = new NothingMatcher();
     @Override
-    public boolean match(CharIterator iter) {
+    public boolean match(CharIterator iter, ParserConfig config) {
         return false;
     }
 

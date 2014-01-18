@@ -1,5 +1,6 @@
 package ru.vmsoftware.parser.builder.matchers;
 
+import ru.vmsoftware.parser.builder.ParserConfig;
 import ru.vmsoftware.parser.builder.iterators.CharIterator;
 
 /**
@@ -15,11 +16,11 @@ class AllMatcher implements TokenMatcher {
     }
 
     @Override
-    public boolean match(CharIterator iter) {
+    public boolean match(CharIterator iter, ParserConfig config) {
         final int initialPos = iter.position();
         int longestPos = initialPos;
         for (TokenMatcher tm: matchers) {
-            if (!tm.match(iter)) {
+            if (!tm.match(iter, config)) {
                 return false;
             }
             longestPos = Math.max(longestPos, iter.position());

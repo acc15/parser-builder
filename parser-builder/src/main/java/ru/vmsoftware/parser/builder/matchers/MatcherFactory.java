@@ -11,18 +11,18 @@ public class MatcherFactory {
     public static int UNBOUNDED = -1;
 
     public static TokenMatcher capture(CaptureListener listener, TokenMatcher matcher) {
-        return new CaptureMatcher(matcher, listener);
+        return new CaptureMatcher(listener, matcher);
     }
 
     public static TokenMatcher anyChar() {
         return AnyCharMatcher.getInstance();
     }
 
-    public static TokenMatcher anyMatch(TokenMatcher... matchers) {
+    public static TokenMatcher any(TokenMatcher... matchers) {
         return new AnyMatcher(matchers);
     }
 
-    public static TokenMatcher allMatch(TokenMatcher... matchers) {
+    public static TokenMatcher all(TokenMatcher... matchers) {
         return new AllMatcher(matchers);
     }
 
@@ -46,6 +46,18 @@ public class MatcherFactory {
         return new RepeatMatcher(min, max, matcher);
     }
 
+    public static TokenMatcher zeroOrOne(TokenMatcher matcher) {
+        return new RepeatMatcher(0, 1, matcher);
+    }
+
+    public static TokenMatcher oneOrMore(TokenMatcher matcher) {
+        return new RepeatMatcher(1, UNBOUNDED, matcher);
+    }
+
+    public static TokenMatcher zeroOrMore(TokenMatcher matcher) {
+        return new RepeatMatcher(0, UNBOUNDED, matcher);
+    }
+
     public static TokenMatcher sequence(CharSequence charSequence) {
         return new CharSequenceMatcher(charSequence);
     }
@@ -54,12 +66,16 @@ public class MatcherFactory {
         return NothingMatcher.getInstance();
     }
 
-    public static TokenMatcher sequenceWithSkip(TokenMatcher skip, TokenMatcher... matchers) {
-        return new SequenceMatcher(skip, matchers);
+    public static TokenMatcher sequence(TokenMatcher... matchers) {
+        return new SequenceMatcher(matchers);
     }
 
-    public static TokenMatcher sequence(TokenMatcher... matchers) {
-        return new SequenceMatcher(nothing(), matchers);
+    public static TokenMatcher tokens(TokenMatcher... tokens) {
+        return new SequenceSkipMatcher(tokens);
+    }
+
+    public static HolderMatcher holder() {
+        return new HolderMatcher();
     }
 
 }

@@ -1,5 +1,6 @@
 package ru.vmsoftware.parser.builder.matchers;
 
+import ru.vmsoftware.parser.builder.ParserConfig;
 import ru.vmsoftware.parser.builder.iterators.CharIterator;
 
 /**
@@ -15,10 +16,10 @@ class AnyMatcher implements TokenMatcher {
     }
 
     @Override
-    public boolean match(CharIterator iter) {
+    public boolean match(CharIterator iter, ParserConfig config) {
         final int initialPos = iter.position();
         for (TokenMatcher tm: matchers) {
-            if (tm.match(iter)) {
+            if (tm.match(iter, config)) {
                 return true;
             }
             iter.moveTo(initialPos);

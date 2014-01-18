@@ -6,6 +6,6 @@ package ru.vmsoftware.parser.builder;
  */
 public interface CaptureListener {
 
-    void onMatch(CharSequence sequence);
+    void onCapture(CaptureContext context);
 
 }

@@ -1,5 +1,6 @@
 package ru.vmsoftware.parser.builder.matchers;
 
+import ru.vmsoftware.parser.builder.ParserConfig;
 import ru.vmsoftware.parser.builder.iterators.CharIterator;
 
 /**
@@ -18,10 +19,10 @@ class RepeatMatcher implements TokenMatcher {
     }
 
     @Override
-    public boolean match(CharIterator iter) {
+    public boolean match(CharIterator iter, ParserConfig config) {
         int matchCount = 0;
         int lastMatchPos = iter.position();
-        while ((max < 0 || matchCount < max) && matcher.match(iter)) {
+        while ((max < 0 || matchCount < max) && matcher.match(iter, config)) {
             lastMatchPos = iter.position();
             ++matchCount;
         }

@@ -1,5 +1,6 @@
 package ru.vmsoftware.parser.builder.matchers;
 
+import ru.vmsoftware.parser.builder.ParserConfig;
 import ru.vmsoftware.parser.builder.iterators.CharIterator;
 
 /**
@@ -15,7 +16,7 @@ class CharSequenceMatcher implements TokenMatcher {
     }
 
     @Override
-    public boolean match(CharIterator iter) {
+    public boolean match(CharIterator iter, ParserConfig config) {
         for (int i=0; i<charSequence.length(); i++) {
             final char ch = charSequence.charAt(i);
             if (!iter.hasChar()) {
